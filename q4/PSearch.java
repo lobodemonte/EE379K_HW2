@@ -64,9 +64,7 @@ public class PSearch implements Callable<Integer> {
 	}
 
 	public Integer call() throws Exception {
-        // your algorithm needs to use this method to get results
-		//Arrays.sort(A);
-		
+        // your algorithm needs to use this method to get results		
 		int index = 0;
 		while (index < A.length){
 			if (A[index] == x){
@@ -77,16 +75,14 @@ public class PSearch implements Callable<Integer> {
 		return (index >= A.length) ? -1 : index+(offset);
 	}
 	
-	//chunkArray method credit to Lesleh from GitHub, with slight modifications to fit purpose
-	//https://gist.github.com/lesleh/7724554
+
     private static int[][] chunkArray(int[] array, int numOfChunks) {
         int[][] output = new int[numOfChunks][];
         int chunkSize = (int)Math.ceil((double)array.length/numOfChunks);
         int offset = 0;
         for (int i = 0; i < numOfChunks; i++){
-        	if (array.length - offset < chunkSize){ //if what's going to be left over is less than chunkSize
+        	if (array.length - offset < chunkSize){ 
         		chunkSize = array.length - offset;
-        		//System.out.println(chunkSize);
         	}
         	int[] chunk = new int[chunkSize];
         	System.arraycopy(array, offset, chunk, 0, chunkSize);
@@ -95,16 +91,7 @@ public class PSearch implements Callable<Integer> {
 
         	output[i] = chunk;
         }
- /*		
-        for(int i = 0; i < numOfChunks; ++i) {
-            int start = i * (int)Math.ceil((double)array.length/numOfChunks);
-            int length = Math.min(array.length - start, (int)Math.ceil((double)array.length/numOfChunks));
- 
-            int[] temp = new int[length];
-            System.arraycopy(array, start, temp, 0, length);
-            output[i] = temp;
-        }
- */
+
         return output;
     }
 }
